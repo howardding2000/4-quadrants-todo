@@ -1,0 +1,9 @@
+.App {
+    width: 100vw;
+}
+
+.todoWapper {
+    width: 80%;
+    max-width: 25rem;
+    margin: 2rem auto;
+}
