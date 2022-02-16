@@ -5,12 +5,14 @@ type TodosContextObj = {
   todoItems: Todo[];
   addTodo: (text: string, isHigh: boolean, isUrgent: boolean) => void;
   removeTodo: (id: string) => void;
+  updateTodo: (item: Todo) => void;
 };
 
 export const TodosContext = React.createContext<TodosContextObj>({
   todoItems: [],
   addTodo: () => {},
   removeTodo: (id: string) => {},
+  updateTodo: (item: Todo) => {},
 });
 
 const TodosContextProvider: React.FC<{}> = (props) => {
@@ -25,15 +27,26 @@ const TodosContextProvider: React.FC<{}> = (props) => {
   };
 
   const removeTodoHander = (todoId: string) => {
-    setTodos((prevTodos)=>{
-        return prevTodos.filter((item) => item.id !== todoId);
-    })
+    setTodos((prevTodos) => {
+      return prevTodos.filter((item) => item.id !== todoId);
+    });
+  };
 
+  const updateTodoHander = (todo: Todo) => {
+    setTodos((prevTodos) => {
+      const todoIndex = prevTodos.findIndex((item) => item.id === todo.id);
+
+      let updatedTodos = [...prevTodos];
+      updatedTodos.splice(todoIndex, 1, todo);
+
+      return updatedTodos;
+    });
   };
   const store: TodosContextObj = {
     todoItems: todos,
     addTodo: addTodoHandler,
     removeTodo: removeTodoHander,
+    updateTodo: updateTodoHander,
   };
 
   return (

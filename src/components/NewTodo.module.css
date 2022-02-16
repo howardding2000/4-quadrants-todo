@@ -22,7 +22,8 @@
   color: lightsalmon;
 }
 .status div {
-  width: 50%;
+  width: 60%;
+  min-width: 60%;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -42,5 +43,8 @@
   background-color: lightsalmon;
   border: 0;
   border-radius: 5px;
+}
+.status button:hover {
+  background-color: salmon;
 }
 /*# sourceMappingURL=./NewTodo.module.css.map */
