@@ -8,7 +8,7 @@ const Todo: React.FC = () => {
   const todoCxt = useContext(TodosContext);
 
   return (
-    <ul className={classes.itemslist}>
+    <ul className={classes.todos}>
       {todoCxt.todoItems.map((item) => (
         <TodoItem key={item.id} item={item} />
       ))}

@@ -1,0 +1,22 @@
+.list {
+  display: flex;
+  justify-content: space-between;
+  text-decoration: none;
+  margin: 0;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  padding-left: 1rem;
+  border-radius: 5px;
+  box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 0.2);
+  background-color: lightsalmon;
+  color: #FFF;
+}
+.list section {
+  width: auto;
+  display: flex;
+  justify-content: space-around;
+}
+.list section div {
+  width: 5rem;
+}
+/*# sourceMappingURL=./TodoItem.module.css.map */
