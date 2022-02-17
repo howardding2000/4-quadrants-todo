@@ -1,43 +1,40 @@
-import React, { useContext, useState } from 'react';
+import React from 'react';
 import Todo from '../models/todo';
-import { TodosContext } from '../store/todos-context';
 import classes from './TodoItem.module.css';
 
-const TodoItem: React.FC<{ item: Todo }> = ({ item }) => {
-  const [mouseEnter, setMouseEnter] = useState(false);
-  const todosCxt = useContext(TodosContext);
+const TodoItem: React.FC<{
+  item: Todo;
+  onUpdateTodo: (item: Todo) => void;
+  onRemoveTodo: (todoid: string) => void;
+}> = (props) => {
+  const completeTodoHandler = (event: React.MouseEvent) => {
+    props.onUpdateTodo({ ...props.item, isCompleted: !props.item.isCompleted });
+  };
+  const changeHighHandler = (event: React.MouseEvent) => {
+    props.onUpdateTodo({ ...props.item, isHigh: !props.item.isHigh });
+  };
+  const changeUrgentHandler = (event: React.MouseEvent) => {
+    props.onUpdateTodo({ ...props.item, isUrgent: !props.item.isUrgent });
+  };
+  const removeTodo = (event: React.MouseEvent) => {
+    props.onRemoveTodo(props.item.id);
+  };
+  console.log(props.item.text);
 
-  const onCompleteTodoHandler = (event: React.MouseEvent) => {
-    todosCxt.updateTodo({ ...item, isCompleted: !item.isCompleted });
-  };
-
-  const mouseEnterHandler = (event: React.MouseEvent) => {
-    setMouseEnter(true);
-  };
-  const mouseOutHandler = (event: React.MouseEvent) => {
-    setMouseEnter(false);
-  };
   return (
-    <li
-      className={`${classes.list} ${
-        item.isCompleted
-          ? classes.completed
-          : mouseEnter
-          ? classes.mouseEnter
-          : ''
-      }
-      }  `}
-      onMouseEnter={mouseEnterHandler}
-      onMouseOut={mouseOutHandler}
-      onClick={onCompleteTodoHandler}
-    >
-      <div>{item.text}</div>
+    <li className={props.item.isCompleted ? classes.completed : classes.list}>
+      <div className={classes.text} onClick={completeTodoHandler}>
+        {props.item.text}
+      </div>
       <section>
-        <div>{item.isHigh ? 'High' : 'Not High'}</div>
-        <div>{item.isUrgent ? 'Urget' : 'Not Urgent'}</div>
+        <div onClick={changeHighHandler}>{props.item.isHigh ? 'H' : 'NH'}</div>
+        <div onClick={changeUrgentHandler}>
+          {props.item.isUrgent ? 'U' : 'NU'}
+        </div>
+        <div onClick={removeTodo}>Remove</div>
       </section>
     </li>
   );
 };
 
-export default TodoItem;
+export default React.memo(TodoItem);

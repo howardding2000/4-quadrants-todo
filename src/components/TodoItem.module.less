@@ -1,37 +1,67 @@
-.list {
+li{
   display: flex;
   justify-content: space-between;
+  align-items: center;
   text-decoration: none;
 
+  height: 2rem;
   margin: 0;
   margin-bottom: 0.5rem;
-  // padding: .5rem;
-  // padding-left: 1rem;
-  border-radius: 5px;
-  box-shadow: 0px 2px 5px 2px rgba(0, 0, 0, 0.2);
 
-  background-color: lightsalmon;
-  color: #fff;
-  div {
+  border-radius: 5px;
+  box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.2);
+
+  .text {
     flex-grow: 1;
-    padding: 0.5rem;
     padding-left: 1rem;
   }
+
   section {
-    width: auto;
+    width: 8rem;
     display: flex;
     justify-content: space-around;
 
+    font-weight: 500;
+    color: rgb(253, 217, 174);
+
     div {
-      width: 5rem;
+      padding-right: 8px;
     }
   }
 }
 
+.list {
+  background-color: lightsalmon;
+  color: #fff;
+  section {
+    color: rgb(253, 217, 174);
+    div:hover{
+      color: #FFF;
+    }
+  }
+ 
+}
+
 .completed {
   background-color: gray;
+  color: lightgray;
+  section {
+    color: rgb(253, 217, 174);
+    div:hover{
+      color: salmon;
+    }
+  }
 }
 
 .mouseEnter {
   background-color: salmon;
 }
+
+.list:hover {
+  background-color: salmon;
+}
+
+.remove{
+  color: rgb(253, 217, 174);
+}
+

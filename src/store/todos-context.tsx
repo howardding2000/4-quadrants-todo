@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import Todo from '../models/todo';
 
 type TodosContextObj = {
@@ -18,30 +18,40 @@ export const TodosContext = React.createContext<TodosContextObj>({
 const TodosContextProvider: React.FC<{}> = (props) => {
   const [todos, setTodos] = useState<Todo[]>([]);
 
+  useEffect(()=>{
+    const reference = localStorage.getItem('todos');
+    if(reference) {
+      const todos = JSON.parse(reference);
+      setTodos(todos);
+    }
+  },[]);
   const addTodoHandler = (text: string, isHigh: boolean, isUrgent: boolean) => {
     const newTodo = new Todo(text, isHigh, isUrgent);
 
     setTodos((prevTodos) => {
-      return prevTodos.concat(newTodo);
+      const todos = prevTodos.concat(newTodo);
+      localStorage.setItem('todos', JSON.stringify(todos));
+      return todos;
     });
   };
 
-  const removeTodoHander = (todoId: string) => {
+  const removeTodoHander = useCallback((todoId: string) => {
     setTodos((prevTodos) => {
-      return prevTodos.filter((item) => item.id !== todoId);
+      const todos = prevTodos.filter((item) => item.id !== todoId);
+      localStorage.setItem('todos', JSON.stringify(todos));
+      return todos;
     });
-  };
+  }, []);
 
-  const updateTodoHander = (todo: Todo) => {
+  const updateTodoHander = useCallback((todo: Todo) => {
     setTodos((prevTodos) => {
       const todoIndex = prevTodos.findIndex((item) => item.id === todo.id);
-
-      let updatedTodos = [...prevTodos];
-      updatedTodos.splice(todoIndex, 1, todo);
-
-      return updatedTodos;
+      let todos = [...prevTodos];
+      todos.splice(todoIndex, 1, todo);
+      localStorage.setItem('todos', JSON.stringify(todos));
+      return todos;
     });
-  };
+  }, []);
   const store: TodosContextObj = {
     todoItems: todos,
     addTodo: addTodoHandler,
