@@ -1,0 +1,15 @@
+.button {
+    /* width: 5rem; */
+    height: 2rem;
+    font: bold large sans-serif;
+    color: #fff;
+    background-color: lightsalmon;
+    border: 0;
+    border-radius: 5px;
+
+    /* box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 0.2); */
+  }
+
+  .button:hover {
+    background-color:salmon;
+  }

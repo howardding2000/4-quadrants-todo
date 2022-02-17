@@ -6,6 +6,7 @@ type TodosContextObj = {
   addTodo: (text: string, isHigh: boolean, isUrgent: boolean) => void;
   removeTodo: (id: string) => void;
   updateTodo: (item: Todo) => void;
+  cleanTodos: () => void;
 };
 
 export const TodosContext = React.createContext<TodosContextObj>({
@@ -13,18 +14,20 @@ export const TodosContext = React.createContext<TodosContextObj>({
   addTodo: () => {},
   removeTodo: (id: string) => {},
   updateTodo: (item: Todo) => {},
+  cleanTodos: () => {},
 });
 
 const TodosContextProvider: React.FC<{}> = (props) => {
   const [todos, setTodos] = useState<Todo[]>([]);
 
-  useEffect(()=>{
+  useEffect(() => {
     const reference = localStorage.getItem('todos');
-    if(reference) {
+    if (reference) {
       const todos = JSON.parse(reference);
       setTodos(todos);
     }
-  },[]);
+  }, []);
+
   const addTodoHandler = (text: string, isHigh: boolean, isUrgent: boolean) => {
     const newTodo = new Todo(text, isHigh, isUrgent);
 
@@ -35,7 +38,7 @@ const TodosContextProvider: React.FC<{}> = (props) => {
     });
   };
 
-  const removeTodoHander = useCallback((todoId: string) => {
+  const removeTodoHandler = useCallback((todoId: string) => {
     setTodos((prevTodos) => {
       const todos = prevTodos.filter((item) => item.id !== todoId);
       localStorage.setItem('todos', JSON.stringify(todos));
@@ -43,7 +46,7 @@ const TodosContextProvider: React.FC<{}> = (props) => {
     });
   }, []);
 
-  const updateTodoHander = useCallback((todo: Todo) => {
+  const updateTodoHandler = useCallback((todo: Todo) => {
     setTodos((prevTodos) => {
       const todoIndex = prevTodos.findIndex((item) => item.id === todo.id);
       let todos = [...prevTodos];
@@ -52,11 +55,17 @@ const TodosContextProvider: React.FC<{}> = (props) => {
       return todos;
     });
   }, []);
+
+  const cleanTodosHandler = () => {
+    setTodos([]);
+    localStorage.removeItem('todos');
+  };
   const store: TodosContextObj = {
     todoItems: todos,
     addTodo: addTodoHandler,
-    removeTodo: removeTodoHander,
-    updateTodo: updateTodoHander,
+    removeTodo: removeTodoHandler,
+    updateTodo: updateTodoHandler,
+    cleanTodos: cleanTodosHandler,
   };
 
   return (

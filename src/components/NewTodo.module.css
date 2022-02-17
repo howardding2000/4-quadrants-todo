@@ -35,16 +35,4 @@
 .status div input:checked + label {
   color: lightsalmon;
 }
-.status button {
-  width: 5rem;
-  height: 2rem;
-  font: bold large sans-serif;
-  color: #fff;
-  background-color: lightsalmon;
-  border: 0;
-  border-radius: 5px;
-}
-.status button:hover {
-  background-color: salmon;
-}
 /*# sourceMappingURL=./NewTodo.module.css.map */

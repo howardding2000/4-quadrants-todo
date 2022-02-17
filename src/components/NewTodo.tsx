@@ -1,5 +1,6 @@
 import React, { useRef, useContext } from 'react';
 import { TodosContext } from '../store/todos-context';
+import Button from '../UI/Button';
 
 import classes from './NewTodo.module.css';
 
@@ -44,7 +45,7 @@ const NewTodo: React.FC = () => {
           />
           <label htmlFor='isUrgent'>Is Urgent</label>
         </div>
-        <button>Add</button>
+        <Button>Add</Button>
       </div>
     </form>
   );
