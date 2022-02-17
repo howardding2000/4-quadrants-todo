@@ -44,9 +44,6 @@ li section div {
 .completed section div:hover {
   color: salmon;
 }
-.mouseEnter {
-  background-color: salmon;
-}
 .list:hover {
   background-color: salmon;
 }
