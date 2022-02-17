@@ -19,10 +19,19 @@ const TodoItem: React.FC<{
   const removeTodo = (event: React.MouseEvent) => {
     props.onRemoveTodo(props.item.id);
   };
+
+
+  const handleDragStart = (event: React.MouseEvent) => {
+    console.log('handleDragStart');
+  }
+
+  const handleDragEnd = (event: React.MouseEvent) => {
+    console.log('handleDragEnd');
+  }
   console.log(props.item.text);
 
   return (
-    <li className={props.item.isCompleted ? classes.completed : classes.list}>
+    <li className={props.item.isCompleted ? classes.completed : classes.list} draggable='true' onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
       <div className={classes.text} onClick={completeTodoHandler}>
         {props.item.text}
       </div>
