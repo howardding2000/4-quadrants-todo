@@ -1,11 +1,10 @@
-li{
+li {
   display: flex;
   justify-content: space-between;
   align-items: center;
   text-decoration: none;
 
-  height: 2rem;
-  margin: 0;
+  // height: 2rem;
   margin-bottom: 0.5rem;
 
   border-radius: 5px;
@@ -13,19 +12,23 @@ li{
 
   .text {
     flex-grow: 1;
+    padding: 5px;
     padding-left: 1rem;
+    cursor: pointer;
   }
 
   section {
-    width: 8rem;
     display: flex;
     justify-content: space-around;
 
+    width: 8rem;
+    min-width: 8rem;
+    // padding-left: 5px;
+    // border-left: 2px solid lightgray;
     font-weight: 500;
-    color: rgb(253, 217, 174);
-
     div {
       padding-right: 8px;
+      cursor: pointer;
     }
   }
 }
@@ -34,12 +37,11 @@ li{
   background-color: lightsalmon;
   color: #fff;
   section {
-    color: rgb(253, 217, 174);
-    div:hover{
-      color: #FFF;
+    color: #fff;
+    div:hover {
+      color: rgb(179, 117, 4);
     }
   }
- 
 }
 
 .completed {
@@ -47,7 +49,7 @@ li{
   color: lightgray;
   section {
     color: rgb(253, 217, 174);
-    div:hover{
+    div:hover {
       color: salmon;
     }
   }
@@ -61,7 +63,6 @@ li{
   background-color: salmon;
 }
 
-.remove{
+.remove {
   color: rgb(253, 217, 174);
 }
-

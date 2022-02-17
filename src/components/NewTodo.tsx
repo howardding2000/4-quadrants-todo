@@ -21,6 +21,7 @@ const NewTodo: React.FC = () => {
         isHighRef.current!.checked,
         isUrgentRef.current!.checked
       );
+      textRef.current!.value = '';
     }
   };
   return (

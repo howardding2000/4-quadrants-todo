@@ -9,7 +9,7 @@ const Todo: React.FC = () => {
   const todosCxt = useContext(TodosContext);
   const updateTodo = todosCxt.updateTodo;
   const removeTodo = todosCxt.removeTodo;
-
+  const cleanTodos = todosCxt.cleanTodos;
   const activeTodoList = todosCxt.todoItems.filter((item) => !item.isCompleted);
   const completedTodoList = todosCxt.todoItems.filter(
     (item) => item.isCompleted
@@ -35,7 +35,7 @@ const Todo: React.FC = () => {
           />
         ))}
       </ul>
-      <Button>Clean Todos</Button>
+      <Button onClick={cleanTodos}>Clean Todos</Button>
     </>
   );
 };

@@ -1,9 +1,9 @@
 import classes from './Button.module.css';
 
 
-const Button: React.FC = (props) => {
+const Button: React.FC<any> = (props) => {
 
-    return <button className={classes.button}>{props.children}</button>
+    return <button className={classes.button} onClick={props.onClick}>{props.children}</button>
 };
 
 export default Button;
