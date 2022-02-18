@@ -1,5 +1,6 @@
 import React from 'react';
 import Todo from '../models/todo';
+import DndCard from '../UI/DndCard';
 import classes from './TodoItem.module.css';
 
 const TodoItem: React.FC<{
@@ -7,6 +8,8 @@ const TodoItem: React.FC<{
   onUpdateTodo: (item: Todo) => void;
   onRemoveTodo: (todoid: string) => void;
 }> = (props) => {
+
+  // task handlers
   const completeTodoHandler = (event: React.MouseEvent) => {
     props.onUpdateTodo({ ...props.item, isCompleted: !props.item.isCompleted });
   };
@@ -20,18 +23,14 @@ const TodoItem: React.FC<{
     props.onRemoveTodo(props.item.id);
   };
 
-
-  const handleDragStart = (event: React.MouseEvent) => {
-    console.log('handleDragStart');
-  }
-
-  const handleDragEnd = (event: React.MouseEvent) => {
-    console.log('handleDragEnd');
-  }
-  console.log(props.item.text);
+ 
 
   return (
-    <li className={props.item.isCompleted ? classes.completed : classes.list} draggable='true' onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
+    <DndCard>
+    <li
+      className={props.item.isCompleted ? classes.completed : classes.list}
+      draggable='true'
+    >
       <div className={classes.text} onClick={completeTodoHandler}>
         {props.item.text}
       </div>
@@ -43,6 +42,7 @@ const TodoItem: React.FC<{
         <div onClick={removeTodo}>Remove</div>
       </section>
     </li>
+    </DndCard>
   );
 };
 
