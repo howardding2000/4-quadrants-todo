@@ -44,9 +44,6 @@ li section div {
 .completed section div:hover {
   color: salmon;
 }
-.list:hover {
-  background-color: salmon;
-}
 .remove {
   color: #fdd9ae;
 }
