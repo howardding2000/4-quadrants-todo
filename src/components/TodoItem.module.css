@@ -31,7 +31,7 @@ li section div {
 .list section {
   color: #fff;
 }
-.list section div:hover {
+.list section div:active {
   color: #b37504;
 }
 .completed {
@@ -41,7 +41,7 @@ li section div {
 .completed section {
   color: #fdd9ae;
 }
-.completed section div:hover {
+.completed section div:active {
   color: salmon;
 }
 .remove {

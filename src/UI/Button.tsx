@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import classes from './Button.module.css';
 
 const Button: React.FC<any> = (props) => {
