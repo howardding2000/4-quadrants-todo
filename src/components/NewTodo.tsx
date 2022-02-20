@@ -27,8 +27,8 @@ const NewTodo: React.FC = () => {
   return (
     <form onSubmit={submitHandler} className={classes.form}>
       <input type='text' ref={textRef} placeholder='Add new todo...' />
-      <div className={classes.status}>
-        <div>
+      <div className={classes.setup}>
+        <div className={classes.status}>
           <input
             type='checkbox'
             id='isHigh'

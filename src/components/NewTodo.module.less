@@ -26,7 +26,7 @@
   }
 }
 
-.status {
+.setup {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -34,17 +34,14 @@
   height: 2rem;
   margin: 0.5rem;
   font-weight: bold;
-  // color: salmon;
 
-  div {
-    width: 60%;
-    min-width: 60%;
+  .status {
     display: flex;
-    justify-content: space-around;
+    justify-content: flex-start;
     align-items: center;
 
-    position: relative;
     label {
+        margin-right: 1rem;
         color: lightgray;
     }
     input:checked + label {
