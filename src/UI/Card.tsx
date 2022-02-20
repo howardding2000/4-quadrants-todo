@@ -1,9 +1,9 @@
 
-
+import classes from './Card.module.css';
 const Card: React.FC =(props) =>{
     
     return (
-        <li>{props.children}</li>
+        <div className={classes.card}>{props.children}</div>
     )
 }
 

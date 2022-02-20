@@ -1,6 +1,6 @@
 import React from 'react';
 import Todo from '../models/todo';
-import DndCard from '../UI/DndCard';
+import Card from '../UI/Card';
 import classes from './TodoItem.module.css';
 
 const TodoItem: React.FC<{
@@ -8,7 +8,6 @@ const TodoItem: React.FC<{
   onUpdateTodo: (item: Todo) => void;
   onRemoveTodo: (todoid: string) => void;
 }> = (props) => {
-
   // task handlers
   const completeTodoHandler = (event: React.MouseEvent) => {
     props.onUpdateTodo({ ...props.item, isCompleted: !props.item.isCompleted });
@@ -23,26 +22,39 @@ const TodoItem: React.FC<{
     props.onRemoveTodo(props.item.id);
   };
 
- 
-
   return (
-    <DndCard>
-    <li
-      className={props.item.isCompleted ? classes.completed : classes.list}
-      draggable='true'
-    >
-      <div className={classes.text} onClick={completeTodoHandler}>
-        {props.item.text}
-      </div>
-      <section>
-        <div onClick={changeHighHandler}>{props.item.isHigh ? 'H' : 'NH'}</div>
-        <div onClick={changeUrgentHandler}>
-          {props.item.isUrgent ? 'U' : 'NU'}
+    <Card>
+      <li
+        className={
+          props.item.isCompleted
+            ? classes['is-completed']
+            : classes[`is-not-completed`]
+        }
+      >
+        <div className={classes.text} onClick={completeTodoHandler}>
+          {props.item.text}
         </div>
-        <div onClick={removeTodo}>Remove</div>
-      </section>
-    </li>
-    </DndCard>
+        <section>
+          <div className={classes.status}>
+            {props.item.isCompleted ? (
+              <div>DONE</div>
+            ) : (
+              <>
+                <div className={classes['status-h']} onClick={changeHighHandler}>
+                  {props.item.isHigh ? 'H' : 'NH'}
+                </div>
+                <div className={classes['status-u']} onClick={changeUrgentHandler}>
+                  {props.item.isUrgent ? 'U' : 'NU'}
+                </div>
+              </>
+            )}
+          </div>
+          <div className={classes.remove} onClick={removeTodo}>
+            Remove
+          </div>
+        </section>
+      </li>
+    </Card>
   );
 };
 

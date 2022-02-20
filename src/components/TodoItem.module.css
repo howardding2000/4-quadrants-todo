@@ -18,33 +18,50 @@ li section {
   justify-content: space-around;
   width: 8rem;
   min-width: 8rem;
+  height: 100%;
   font-weight: 500;
+  text-align: center;
 }
-li section div {
-  padding-right: 8px;
+li section .status {
+  display: flex;
+  justify-content: space-around;
+  width: 40%;
+}
+li section .status .status-h,
+li section .status .status-u {
+  width: 50%;
   cursor: pointer;
 }
-.list {
-  background-color: lightsalmon;
-  color: #fff;
+li section .remove {
+  color: lightsalmon;
+  width: 60%;
+  cursor: pointer;
 }
-.list section {
-  color: #fff;
+.is-not-completed {
+  background-color: #fff;
+  color: lightsalmon;
 }
-.list section div:active {
-  color: #b37504;
+.is-not-completed section {
+  color: lightsalmon;
 }
-.completed {
-  background-color: gray;
-  color: lightgray;
-}
-.completed section {
-  color: #fdd9ae;
-}
-.completed section div:active {
+.is-not-completed section .status-h:active,
+.is-not-completed section .status-u:active,
+.is-not-completed section .remove {
   color: salmon;
 }
-.remove {
-  color: #fdd9ae;
+.is-completed {
+  background-color: #e7e7e7;
+  color: gray;
+}
+.is-completed .text {
+  text-decoration-line: line-through;
+}
+.is-completed section {
+  color: salmon(253, 217, 174);
+}
+.is-completed section .status-h:active,
+.is-completed section .status-u:active,
+.is-completed section .remove {
+  color: salmon;
 }
 /*# sourceMappingURL=./TodoItem.module.css.map */

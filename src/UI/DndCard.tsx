@@ -15,6 +15,7 @@ const DndCard: React.FC = (props) => {
   return (
     <div
       className={classes.dnd}
+      draggable='true'
       // style={showStyle}
       // onDragStart={dragStartHandler}
       // onDragEnd={dragEndHandler}
