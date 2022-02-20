@@ -7,6 +7,9 @@
   border-radius: 1rem;
   border: 2px solid salmon;
 }
+.form ::placeholder {
+  color: gray;
+}
 .form input {
   height: 2rem;
   margin: 0.5rem;

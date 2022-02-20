@@ -46,7 +46,7 @@ li section .remove {
 }
 .is-not-completed section .status-h:active,
 .is-not-completed section .status-u:active,
-.is-not-completed section .remove {
+.is-not-completed section .remove:active {
   color: salmon;
 }
 .is-completed {
@@ -61,7 +61,7 @@ li section .remove {
 }
 .is-completed section .status-h:active,
 .is-completed section .status-u:active,
-.is-completed section .remove {
+.is-completed section .remove:active {
   color: salmon;
 }
 /*# sourceMappingURL=./TodoItem.module.css.map */
