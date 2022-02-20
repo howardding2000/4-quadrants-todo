@@ -26,6 +26,7 @@ const Todo: React.FC = () => {
             onRemoveTodo={removeTodo}
           />
         ))}
+
         {completedTodoList.map((item) => (
           <TodoItem
             key={item.id}
