@@ -1,7 +1,9 @@
 import React from 'react';
 import classes from './Button.module.css';
 
-const Button: React.FC<any> = (props) => {
+const Button: React.FC<{ onClick?: (event: React.MouseEvent) => void }> = (
+  props
+) => {
   return (
     <button className={classes.button} onClick={props.onClick}>
       {props.children}
