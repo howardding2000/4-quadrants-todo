@@ -6,7 +6,7 @@ class Todo {
     isCompleted: boolean;
 
     constructor(todoText:string, isHigh: boolean, isUrgent: boolean){
-        this.id = Math.random().toString();
+        this.id = Date.now().toString();
         this.text = todoText;
         this.isHigh = isHigh;
         this.isUrgent = isUrgent; 
