@@ -1,6 +1,7 @@
 import React from 'react';
 import Todo from '../models/todo';
-import Card from '../UI/Card';
+// import Card from '../UI/Card';
+import DndCard from '../UI/DndCard';
 import classes from './TodoItem.module.css';
 
 const TodoItem: React.FC<{
@@ -23,7 +24,7 @@ const TodoItem: React.FC<{
   };
 
   return (
-    <Card>
+    <DndCard>
       <li
         className={
           props.item.isCompleted
@@ -54,7 +55,7 @@ const TodoItem: React.FC<{
           </div>
         </section>
       </li>
-    </Card>
+    </DndCard>
   );
 };
 
