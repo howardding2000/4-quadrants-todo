@@ -1,4 +1,6 @@
 import React, { useContext } from 'react';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 import { TodosContext } from '../store/todos-context';
 import Button from '../UI/Button';
 import TodoItem from './TodoItem';
@@ -16,7 +18,7 @@ const Todo: React.FC = () => {
   );
 
   return (
-    <>
+    <DndProvider backend={HTML5Backend}>
       <ul className={classes.todos}>
         {activeTodoList.map((item) => (
           <TodoItem
@@ -37,7 +39,7 @@ const Todo: React.FC = () => {
         ))}
       </ul>
       <Button onClick={cleanTodos}>Clean Todos</Button>
-    </>
+    </DndProvider>
   );
 };
 
