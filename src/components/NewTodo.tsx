@@ -26,7 +26,7 @@ const NewTodo: React.FC = () => {
   };
   return (
     <form onSubmit={submitHandler} className={classes.form}>
-      <input type='text' ref={textRef} placeholder='Add new todo...' />
+      <input type='text' ref={textRef} placeholder='Add new to do...' />
       <div className={classes.setup}>
         <div className={classes.status}>
           <input
