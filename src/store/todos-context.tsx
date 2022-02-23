@@ -1,5 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
-import { useDrapId } from "../hooks/use-drapId";
+import React, { useState, useCallback, useEffect,useRef } from "react";
 import Todo from "../models/todo";
 
 type TodosContextObj = {
@@ -22,20 +21,18 @@ export const TodosContext = React.createContext<TodosContextObj>({
   cleanTodos: () => {},
 });
 
-let dragTodo: Todo;
-
 const TodosContextProvider: React.FC<{}> = (props) => {
   const [todos, setTodos] = useState<Todo[]>([]);
-  const [drapId, setDrapId] = useState<string>();
-  const drapIdCtx = useDrapId({ drapId });
+  const drapIdRef = useRef('');
 
   useEffect(() => {
     //get todolist from local storage
+    console.log('todos updated?')
     const reference = localStorage.getItem("todos");
 
     if (reference) {
-      const updatedTodos = JSON.parse(reference);
-      setTodos(updatedTodos);
+      const LocalTodos = JSON.parse(reference);
+      setTodos(LocalTodos);
     }
   }, []);
 
@@ -43,46 +40,44 @@ const TodosContextProvider: React.FC<{}> = (props) => {
     const newTodo = new Todo(text, isHigh, isUrgent);
 
     setTodos((prevTodos) => {
-      const todos = prevTodos.concat(newTodo);
-      localStorage.setItem("todos", JSON.stringify(todos));
-      return todos;
+      const updatedTodos = prevTodos.concat(newTodo);
+      localStorage.setItem("todos", JSON.stringify(updatedTodos));
+      return updatedTodos;
     });
   };
 
   const removeTodoHandler = useCallback((todoId: string) => {
     setTodos((prevTodos) => {
-      const todos = prevTodos.filter((item) => item.id !== todoId);
-      localStorage.setItem("todos", JSON.stringify(todos));
-      return todos;
+      const updatedTodos = prevTodos.filter((item) => item.id !== todoId);
+      localStorage.setItem("todos", JSON.stringify(updatedTodos));
+      return updatedTodos;
     });
   }, []);
 
   const updateTodoHandler = useCallback((todo: Todo) => {
     setTodos((prevTodos) => {
       const todoIndex = prevTodos.findIndex((item) => item.id === todo.id);
-      let todos = [...prevTodos];
-      todos.splice(todoIndex, 1, todo);
-      localStorage.setItem("todos", JSON.stringify(todos));
-      return todos;
+      const updatedTodos = [...prevTodos].splice(todoIndex, 1, todo);
+      localStorage.setItem("todos", JSON.stringify(updatedTodos));
+      return updatedTodos;
     });
   }, []);
 
   const dragTodoHandler = (id: string) => {
-    if (drapId === id) {
+  
+    if (drapIdRef.current === id) {
       return;
     }
     // store drag id
-    setDrapId(id);
+    drapIdRef.current = id;
   };
 
-  const dropTodoHandler = useCallback(
-    (tragetId: string) => {
-      const { drapId } = drapIdCtx;
-
+  const dropTodoHandler = (tragetId: string) => {
+      const drapId = drapIdRef.current;
       if (drapId === tragetId) {
         return;
       }
-
+      
       setTodos((prevTodos) => {
         // rearrange the order of todolist
         const drapIndex = prevTodos.findIndex((item) => item.id === drapId);
@@ -115,9 +110,7 @@ const TodosContextProvider: React.FC<{}> = (props) => {
         localStorage.setItem("todos", JSON.stringify(updatedTodos));
         return updatedTodos;
       });
-    },
-    [drapIdCtx]
-  );
+    }
 
   const cleanTodosHandler = () => {
     setTodos([]);
