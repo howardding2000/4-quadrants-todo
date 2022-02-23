@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect,useRef } from "react";
+import React, { useState, useCallback, useLayoutEffect,useRef } from "react";
 import Todo from "../models/todo";
 
 type TodosContextObj = {
@@ -25,13 +25,14 @@ const TodosContextProvider: React.FC<{}> = (props) => {
   const [todos, setTodos] = useState<Todo[]>([]);
   const drapIdRef = useRef('');
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     //get todolist from local storage
     console.log('todos updated?')
     const reference = localStorage.getItem("todos");
 
     if (reference) {
-      const LocalTodos = JSON.parse(reference);
+      const LocalTodos: Todo[] = JSON.parse(reference);
+      console.log(LocalTodos);
       setTodos(LocalTodos);
     }
   }, []);
@@ -55,9 +56,15 @@ const TodosContextProvider: React.FC<{}> = (props) => {
   }, []);
 
   const updateTodoHandler = useCallback((todo: Todo) => {
+    console.log(todo);
     setTodos((prevTodos) => {
+      console.log(prevTodos);
       const todoIndex = prevTodos.findIndex((item) => item.id === todo.id);
-      const updatedTodos = [...prevTodos].splice(todoIndex, 1, todo);
+      console.log(prevTodos);
+      console.log(todoIndex);
+      const updatedTodos = [...prevTodos];
+      updatedTodos.splice(todoIndex, 1, todo);
+      console.log(updatedTodos);
       localStorage.setItem("todos", JSON.stringify(updatedTodos));
       return updatedTodos;
     });
@@ -72,7 +79,7 @@ const TodosContextProvider: React.FC<{}> = (props) => {
     drapIdRef.current = id;
   };
 
-  const dropTodoHandler = (tragetId: string) => {
+  const dropTodoHandler = useCallback((tragetId: string) => {
       const drapId = drapIdRef.current;
       if (drapId === tragetId) {
         return;
@@ -107,10 +114,11 @@ const TodosContextProvider: React.FC<{}> = (props) => {
           updatedTodos[tragetIndex + 1].isCompleted =
             updatedTodos[tragetIndex].isCompleted;
         }
+        console.log(updatedTodos);
         localStorage.setItem("todos", JSON.stringify(updatedTodos));
         return updatedTodos;
       });
-    }
+    },[])
 
   const cleanTodosHandler = () => {
     setTodos([]);
