@@ -1,27 +1,34 @@
 // import React, { useState } from 'react';
+import { useEffect } from 'react';
+import { useDrag } from 'react-dnd';
+import { ItemTypes } from '../dnd/ItemTypes';
+import Todo from '../models/todo';
 import classes from './DndCard.module.css';
 
-const DndCard: React.FC = (props) => {
-  // const [showStyle, setShowStyle] = useState({});
+const DndCard: React.FC<{ item: Todo; onDrapItem: (item: Todo) => void }> = (
+  props
+) => {
+  const [{ isDragging }, drag] = useDrag(() => ({
+    type: ItemTypes.TODO,
+    collect: (monitor) => ({
+      isDragging: !!monitor.isDragging(),
+    }),
+  }));
 
-  // // Darp and Drop handlers
-  // const dragStartHandler = (event: React.DragEvent) => {};
-
-  // const dragEndHandler = (event: React.DragEvent) => {};
-  // const dragEnterHandler = (event: React.DragEvent) => {};
-  // const dragLeaveHandler = (event: React.DragEvent) => {};
-  // const dragOverHandler = (event: React.DragEvent) => {};
+  useEffect(() => {
+    if (isDragging) {
+      props.onDrapItem(props.item);
+    }
+  }, [isDragging, props]);
 
   return (
     <div
       className={classes.dnd}
-      draggable='true'
-      // style={showStyle}
-      // onDragStart={dragStartHandler}
-      // onDragEnd={dragEndHandler}
-      // onDragEnter={dragEnterHandler}
-      // onDragLeave={dragLeaveHandler}
-      // onDragOver={dragOverHandler}
+      ref={drag}
+      style={{
+        opacity: isDragging ? 0.5 : 1,
+        // display: isDragging? 'none': 'block',
+      }}
     >
       {props.children}
     </div>

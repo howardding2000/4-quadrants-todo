@@ -4,14 +4,15 @@ li {
   align-items: center;
   text-decoration: none;
 
-  min-height: 2rem;
+  // padding: 10px;
   border-radius: 5px;
   box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.2);
-
+  font-weight: 500;
+  
   .text {
     flex-grow: 1;
     padding: 10px;
-    padding-left: 1rem;
+    // padding-right: 10px;
     width: 1rem; //flexible
     overflow-wrap: break-word;
     cursor: pointer;
@@ -20,27 +21,32 @@ li {
   section {
     display: flex;
     justify-content: space-around;
+    align-items: stretch;
     text-align: center;
-    font-weight: 500;
 
+
+    font-weight: 500;
     width: 8rem;
     min-width: 8rem;
-    height: 100%;
 
     .status {
       display: flex;
       justify-content: space-around;
+      align-items: center;
+      
       width: 40%;
 
       .status-h,
       .status-u {
+        padding: 10px 0;
         width: 50%;
         cursor: pointer;
       }
     }
     .remove {
-      // color: rgb(253, 217, 174);
       color: lightsalmon;
+
+      padding: 10px 0;
       width: 60%;
       cursor: pointer;
     }

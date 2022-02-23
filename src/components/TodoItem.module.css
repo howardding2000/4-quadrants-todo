@@ -3,14 +3,13 @@ li {
   justify-content: space-between;
   align-items: center;
   text-decoration: none;
-  min-height: 2rem;
   border-radius: 5px;
   box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.2);
+  font-weight: 500;
 }
 li .text {
   flex-grow: 1;
   padding: 10px;
-  padding-left: 1rem;
   width: 1rem;
   overflow-wrap: break-word;
   cursor: pointer;
@@ -18,24 +17,27 @@ li .text {
 li section {
   display: flex;
   justify-content: space-around;
+  align-items: stretch;
   text-align: center;
   font-weight: 500;
   width: 8rem;
   min-width: 8rem;
-  height: 100%;
 }
 li section .status {
   display: flex;
   justify-content: space-around;
+  align-items: center;
   width: 40%;
 }
 li section .status .status-h,
 li section .status .status-u {
+  padding: 10px 0;
   width: 50%;
   cursor: pointer;
 }
 li section .remove {
   color: lightsalmon;
+  padding: 10px 0;
   width: 60%;
   cursor: pointer;
 }
