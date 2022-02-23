@@ -8,12 +8,14 @@ import TodoItem from './TodoItem';
 import classes from './Todos.module.css';
 
 const Todo: React.FC = () => {
-  const todosCxt = useContext(TodosContext);
-  const updateTodo = todosCxt.updateTodo;
-  const removeTodo = todosCxt.removeTodo;
-  const cleanTodos = todosCxt.cleanTodos;
-  const activeTodoList = todosCxt.todoItems.filter((item) => !item.isCompleted);
-  const completedTodoList = todosCxt.todoItems.filter(
+  const {todoItems,updateTodo,removeTodo,dragTodo,dropTodo,cleanTodos} = useContext(TodosContext);
+  // const updateTodo = todosCxt.updateTodo;
+  // const removeTodo = todosCxt.removeTodo;
+  // const dragTodo = todosCxt.dragTodo;
+  // const dropTodo = todosCxt.dropTodo;
+  // const cleanTodos = todosCxt.cleanTodos;
+  const activeTodoList = todoItems.filter((item) => !item.isCompleted);
+  const completedTodoList = todoItems.filter(
     (item) => item.isCompleted
   );
 
@@ -26,6 +28,9 @@ const Todo: React.FC = () => {
             item={item}
             onUpdateTodo={updateTodo}
             onRemoveTodo={removeTodo}
+            onDragTodo={dragTodo}
+            onDropTodo={dropTodo}
+
           />
         ))}
 
@@ -35,6 +40,8 @@ const Todo: React.FC = () => {
             item={item}
             onUpdateTodo={updateTodo}
             onRemoveTodo={removeTodo}
+            onDragTodo={dragTodo}
+            onDropTodo={dropTodo}
           />
         ))}
       </ul>

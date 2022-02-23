@@ -1,4 +1,6 @@
 import React from 'react';
+import { useDrop } from 'react-dnd';
+import { ItemTypes } from '../dnd/ItemTypes';
 import Todo from '../models/todo';
 // import Card from '../UI/Card';
 import DndCard from '../UI/DndCard';
@@ -8,7 +10,20 @@ const TodoItem: React.FC<{
   item: Todo;
   onUpdateTodo: (item: Todo) => void;
   onRemoveTodo: (todoid: string) => void;
+  onDragTodo: (dragItem: Todo)=> void;
+  onDropTodo: (tragetId: string)=> void;
 }> = (props) => {
+  const [{ isOver }, drop] = useDrop(
+    () => ({
+      accept: ItemTypes.TODO,
+      drop: () => props.onDropTodo(props.item.id),
+      collect: (monitor) => ({
+        isOver: !!monitor.isOver(),
+      }),
+    }),
+    []
+  );
+
   // task handlers
   const completeTodoHandler = (event: React.MouseEvent) => {
     props.onUpdateTodo({ ...props.item, isCompleted: !props.item.isCompleted });
@@ -24,14 +39,16 @@ const TodoItem: React.FC<{
   };
 
   return (
-    <DndCard>
+    <DndCard item={props.item} onDrapItem={props.onDragTodo}>
       <li
+        ref={drop}
+        style={isOver ? {outline: '3px solid lightgray'} : {}}
         className={
           props.item.isCompleted
             ? classes['is-completed']
             : classes[`is-not-completed`]
         }
-      >
+      > 
         <div className={classes.text} onClick={completeTodoHandler}>
           {props.item.text}
         </div>
@@ -41,10 +58,16 @@ const TodoItem: React.FC<{
               <div>DONE</div>
             ) : (
               <>
-                <div className={classes['status-h']} onClick={changeHighHandler}>
+                <div
+                  className={classes['status-h']}
+                  onClick={changeHighHandler}
+                >
                   {props.item.isHigh ? 'H' : 'NH'}
                 </div>
-                <div className={classes['status-u']} onClick={changeUrgentHandler}>
+                <div
+                  className={classes['status-u']}
+                  onClick={changeUrgentHandler}
+                >
                   {props.item.isUrgent ? 'U' : 'NU'}
                 </div>
               </>
