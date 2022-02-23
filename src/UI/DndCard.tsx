@@ -2,10 +2,9 @@
 import { useEffect } from 'react';
 import { useDrag } from 'react-dnd';
 import { ItemTypes } from '../dnd/ItemTypes';
-import Todo from '../models/todo';
 import classes from './DndCard.module.css';
 
-const DndCard: React.FC<{ item: Todo; onDrapItem: (item: Todo) => void }> = (
+const DndCard: React.FC<{ id: string; onDrapItem: (id: string) => void }> = (
   props
 ) => {
   const [{ isDragging }, drag] = useDrag(() => ({
@@ -17,7 +16,7 @@ const DndCard: React.FC<{ item: Todo; onDrapItem: (item: Todo) => void }> = (
 
   useEffect(() => {
     if (isDragging) {
-      props.onDrapItem(props.item);
+      props.onDrapItem(props.id);
     }
   }, [isDragging, props]);
 

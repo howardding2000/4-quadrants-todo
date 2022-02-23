@@ -10,7 +10,7 @@ const TodoItem: React.FC<{
   item: Todo;
   onUpdateTodo: (item: Todo) => void;
   onRemoveTodo: (todoid: string) => void;
-  onDragTodo: (dragItem: Todo)=> void;
+  onDragTodo: (dragId: string)=> void;
   onDropTodo: (tragetId: string)=> void;
 }> = (props) => {
   const [{ isOver }, drop] = useDrop(
@@ -39,7 +39,7 @@ const TodoItem: React.FC<{
   };
 
   return (
-    <DndCard item={props.item} onDrapItem={props.onDragTodo}>
+    <DndCard id={props.item.id} onDrapItem={props.onDragTodo}>
       <li
         ref={drop}
         style={isOver ? {outline: '3px solid lightgray'} : {}}
