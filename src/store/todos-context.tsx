@@ -27,12 +27,10 @@ const TodosContextProvider: React.FC<{}> = (props) => {
 
   useLayoutEffect(() => {
     //get todolist from local storage
-    console.log('todos updated?')
     const reference = localStorage.getItem("todos");
 
     if (reference) {
       const LocalTodos: Todo[] = JSON.parse(reference);
-      console.log(LocalTodos);
       setTodos(LocalTodos);
     }
   }, []);
@@ -56,15 +54,10 @@ const TodosContextProvider: React.FC<{}> = (props) => {
   }, []);
 
   const updateTodoHandler = useCallback((todo: Todo) => {
-    console.log(todo);
     setTodos((prevTodos) => {
-      console.log(prevTodos);
       const todoIndex = prevTodos.findIndex((item) => item.id === todo.id);
-      console.log(prevTodos);
-      console.log(todoIndex);
       const updatedTodos = [...prevTodos];
       updatedTodos.splice(todoIndex, 1, todo);
-      console.log(updatedTodos);
       localStorage.setItem("todos", JSON.stringify(updatedTodos));
       return updatedTodos;
     });
@@ -114,7 +107,6 @@ const TodosContextProvider: React.FC<{}> = (props) => {
           updatedTodos[tragetIndex + 1].isCompleted =
             updatedTodos[tragetIndex].isCompleted;
         }
-        console.log(updatedTodos);
         localStorage.setItem("todos", JSON.stringify(updatedTodos));
         return updatedTodos;
       });
