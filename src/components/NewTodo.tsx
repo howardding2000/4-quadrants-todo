@@ -2,7 +2,7 @@ import React, { useRef, useContext } from 'react';
 import { TodosContext } from '../store/todos-context';
 import Button from '../UI/Button';
 
-import classes from './NewTodo.module.css';
+import classes from './NewTodo.module.scss';
 
 const NewTodo: React.FC = () => {
   const textRef = useRef<HTMLInputElement>(null);

@@ -2,7 +2,7 @@ import React from "react";
 import Todo from "../models/todo";
 // import Card from '../UI/Card';
 import DndList from "../dnd/DndList";
-import classes from "./TodoItem.module.css";
+import classes from "./TodoItem.module.scss";
 
 const TodoItem: React.FC<{
   item: Todo;
