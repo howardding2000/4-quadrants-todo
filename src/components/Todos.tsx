@@ -8,20 +8,16 @@ import TodoItem from './TodoItem';
 import classes from './Todos.module.css';
 
 const Todo: React.FC = () => {
-  const {todoItems,updateTodo,removeTodo,dragTodo,dropTodo,cleanTodos} = useContext(TodosContext);
-  // const updateTodo = todosCxt.updateTodo;
-  // const removeTodo = todosCxt.removeTodo;
-  // const dragTodo = todosCxt.dragTodo;
-  // const dropTodo = todosCxt.dropTodo;
-  // const cleanTodos = todosCxt.cleanTodos;
+  const { todoItems, updateTodo, removeTodo, dragTodo, dropTodo, cleanTodos } =
+    useContext(TodosContext);
+
   const activeTodoList = todoItems.filter((item) => !item.isCompleted);
-  const completedTodoList = todoItems.filter(
-    (item) => item.isCompleted
-  );
+  const completedTodoList = todoItems.filter((item) => item.isCompleted);
 
   return (
     <DndProvider backend={HTML5Backend}>
       <ul className={classes.todos}>
+        {todoItems.length===0 && <div className={classes.empty}>Wow...! Your list is empty!</div>}
         {activeTodoList.map((item) => (
           <TodoItem
             key={item.id}
@@ -30,7 +26,6 @@ const Todo: React.FC = () => {
             onRemoveTodo={removeTodo}
             onDragTodo={dragTodo}
             onDropTodo={dropTodo}
-
           />
         ))}
 

@@ -13,12 +13,12 @@
     text-align: center;
     line-height: 2rem;
     color: lightsalmon;
-    font-weight: bold;
+    /* font-weight: bold; */
 }
 
 .group li:first-child {
-    position: relative;
-    height: 2rem +3px;
     background-color: lightsalmon;
     color: #FFF;
+    /* box-shadow: 0px -2px 2px 1px rgba(0, 0, 0, 0.2); */
+
 }
