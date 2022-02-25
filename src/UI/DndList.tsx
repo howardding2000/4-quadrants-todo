@@ -41,7 +41,7 @@ const DndList: React.FC<{
         // display: isDragging? 'none': 'block',
       }}
     >
-      <div ref={drop} style={isOver ? { outline: "3px solid lightgray" } : {}}>
+      <div ref={drop} style={isOver ? { outline: "3px solid lightgray", borderRadius: '5px' } : {}}>
         {props.children}
       </div>
     </li>

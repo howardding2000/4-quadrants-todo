@@ -1,6 +1,5 @@
-import Todos from './components/Todos';
 import TodosContextProvider from './store/todos-context';
-
+import TodosGroup from './components/TodosGroup';
 import classes from './App.module.css';
 import NewTodo from './components/NewTodo';
 
@@ -13,7 +12,7 @@ function App() {
         </header>
         <div className={classes.todoWapper}>
           <NewTodo />
-          <Todos />
+          <TodosGroup />
         </div>
       </div>
     </TodosContextProvider>
