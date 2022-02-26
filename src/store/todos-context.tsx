@@ -1,5 +1,6 @@
-import React, { useState, useCallback, useLayoutEffect,useRef } from "react";
-import Todo from "../models/todo";
+import React, { useState, useCallback, useLayoutEffect, useRef } from 'react';
+import Todo from '../models/todo';
+import { useData } from '../hooks/use-data';
 
 type TodosContextObj = {
   todoItems: Todo[];
@@ -23,14 +24,16 @@ export const TodosContext = React.createContext<TodosContextObj>({
 
 const TodosContextProvider: React.FC<{}> = (props) => {
   const [todos, setTodos] = useState<Todo[]>([]);
+  const [fetchTodosData, updateTodosData, cleanTodosData] = useData<Todo>(
+    'localStorage',
+    'todos'
+  );
   const drapIdRef = useRef('');
 
   useLayoutEffect(() => {
     //get todolist from local storage
-    const reference = localStorage.getItem("todos");
-
-    if (reference) {
-      const LocalTodos: Todo[] = JSON.parse(reference);
+    const LocalTodos: Todo[] | undefined = fetchTodosData();
+    if (LocalTodos) {
       setTodos(LocalTodos);
     }
   }, []);
@@ -40,7 +43,8 @@ const TodosContextProvider: React.FC<{}> = (props) => {
 
     setTodos((prevTodos) => {
       const updatedTodos = prevTodos.concat(newTodo);
-      localStorage.setItem("todos", JSON.stringify(updatedTodos));
+
+      updateTodosData(updatedTodos);
       return updatedTodos;
     });
   };
@@ -48,7 +52,7 @@ const TodosContextProvider: React.FC<{}> = (props) => {
   const removeTodoHandler = useCallback((todoId: string) => {
     setTodos((prevTodos) => {
       const updatedTodos = prevTodos.filter((item) => item.id !== todoId);
-      localStorage.setItem("todos", JSON.stringify(updatedTodos));
+      updateTodosData(updatedTodos);
       return updatedTodos;
     });
   }, []);
@@ -58,13 +62,12 @@ const TodosContextProvider: React.FC<{}> = (props) => {
       const todoIndex = prevTodos.findIndex((item) => item.id === todo.id);
       const updatedTodos = [...prevTodos];
       updatedTodos.splice(todoIndex, 1, todo);
-      localStorage.setItem("todos", JSON.stringify(updatedTodos));
+      updateTodosData(updatedTodos);
       return updatedTodos;
     });
   }, []);
 
   const dragTodoHandler = (id: string) => {
-  
     if (drapIdRef.current === id) {
       return;
     }
@@ -73,48 +76,46 @@ const TodosContextProvider: React.FC<{}> = (props) => {
   };
 
   const dropTodoHandler = useCallback((tragetId: string) => {
-      const drapId = drapIdRef.current;
-      if (drapId === tragetId) {
-        return;
+    const drapId = drapIdRef.current;
+    if (drapId === tragetId) {
+      return;
+    }
+
+    setTodos((prevTodos) => {
+      // rearrange the order of todolist
+      const drapIndex = prevTodos.findIndex((item) => item.id === drapId);
+
+      // get dragTodo by id
+      const dragTodo = prevTodos[drapIndex];
+
+      // remove dragTodo from todolist
+      const updatedTodos = [...prevTodos.filter((item) => item.id !== drapId)];
+      const tragetIndex = updatedTodos.findIndex(
+        (item) => item.id === tragetId
+      );
+
+      // replace dragTodo into todolist
+      // If drap from the topside of the traget
+      if (drapIndex > tragetIndex) {
+        updatedTodos.splice(tragetIndex, 0, dragTodo);
+        updatedTodos[tragetIndex].isCompleted =
+          updatedTodos[tragetIndex + 1].isCompleted;
       }
-      
-      setTodos((prevTodos) => {
-        // rearrange the order of todolist
-        const drapIndex = prevTodos.findIndex((item) => item.id === drapId);
 
-        // get dragTodo by id
-        const dragTodo = prevTodos[drapIndex];
-
-        // remove dragTodo from todolist
-        const updatedTodos = [
-          ...prevTodos.filter((item) => item.id !== drapId),
-        ];
-        const tragetIndex = updatedTodos.findIndex(
-          (item) => item.id === tragetId
-        );
-
-        // replace dragTodo into todolist
-        // If drap from the topside of the traget
-        if (drapIndex > tragetIndex) {
-          updatedTodos.splice(tragetIndex, 0, dragTodo);
-          updatedTodos[tragetIndex].isCompleted =
-            updatedTodos[tragetIndex + 1].isCompleted;
-        }
-
-        // If drap from the downside of the traget
-        if (drapIndex <= tragetIndex) {
-          updatedTodos.splice(tragetIndex + 1, 0, dragTodo);
-          updatedTodos[tragetIndex + 1].isCompleted =
-            updatedTodos[tragetIndex].isCompleted;
-        }
-        localStorage.setItem("todos", JSON.stringify(updatedTodos));
-        return updatedTodos;
-      });
-    },[])
+      // If drap from the downside of the traget
+      if (drapIndex <= tragetIndex) {
+        updatedTodos.splice(tragetIndex + 1, 0, dragTodo);
+        updatedTodos[tragetIndex + 1].isCompleted =
+          updatedTodos[tragetIndex].isCompleted;
+      }
+      updateTodosData(updatedTodos);
+      return updatedTodos;
+    });
+  }, []);
 
   const cleanTodosHandler = () => {
     setTodos([]);
-    localStorage.removeItem("todos");
+    cleanTodosData();
   };
 
   const store: TodosContextObj = {
