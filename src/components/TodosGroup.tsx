@@ -1,5 +1,5 @@
 import Todos from './Todos';
-import classes from './TodosGroup.module.css';
+import classes from './TodosGroup.module.scss';
 
 const TodosGroup: React.FC = () => {
   return (

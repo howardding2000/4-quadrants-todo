@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDrag, useDrop } from "react-dnd";
 import { ItemTypes } from "../dnd/ItemTypes";
-import classes from "./DndList.module.css";
+import classes from "./DndList.module.scss";
 
 const DndList: React.FC<{
   id: string;

@@ -1,3 +1,5 @@
+@import './scss/theme.scss';
+
 .App {
     width: 100vw;
     min-width: 360px;
@@ -12,7 +14,7 @@
     margin: 2rem auto;
     font-size: 24px;
     font-weight: bold;
-    color:salmon;
+    color: $base-color;
 }
 .todoWapper {
     width: 80%;
