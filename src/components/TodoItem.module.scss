@@ -1,13 +1,10 @@
-@import '../scss/theme.scss';
+@import '../scss/theme';
 
 .item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  @include flexAlignCenter(space-between);
 
   border-radius: 5px;
   box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.2);
-
 
   .text {
     flex-grow: 1;
@@ -27,9 +24,7 @@
     min-width: 8rem;
 
     .status {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
+      @include flexAlignCenter(space-around);
 
       width: 40%;
 
@@ -49,31 +44,28 @@
   }
 }
 
-.is-not-completed {
-  background-color: #fff;
-  color: $base-color;
+@mixin sectionContent($bgColor,$sectionColor,$activeColor) {
+  background-color: $bgColor;
+  color: $sectionColor;
   section {
-    color: $base-color;
+    color: $sectionColor;
     .status-h:active,
     .status-u:active,
     .remove:active {
-      color: $primary-color;
+      color: $activeColor;
     }
   }
+}
+
+
+.is-not-completed {
+  @include sectionContent(#fff,$base-color,$primary-color)
 }
 
 .is-completed {
   .text {
     text-decoration-line: line-through;
   }
-  background-color: rgb(231, 231, 231);
-  color: gray;
-  section {
-    color: salmon(253, 217, 174);
-    .status-h:active,
-    .status-u:active,
-    .remove:active {
-      color: salmon;
-    }
-  }
+  @include sectionContent( rgb(231, 231, 231), $drakColor,$primary-color)
+  
 }

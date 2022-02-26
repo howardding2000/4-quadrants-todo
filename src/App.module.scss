@@ -1,23 +1,24 @@
-@import './scss/theme.scss';
+@import './scss/theme';
 
 .App {
-    width: 100vw;
-    min-width: 360px;
-}
-.App header {
+  width: 100vw;
+  min-width: 360px;
+
+  header {
     width: 360px;
     margin: 0 auto;
     text-align: center;
-}
 
-.App header h1 {
-    margin: 2rem auto;
-    font-size: 24px;
-    font-weight: bold;
-    color: $base-color;
-}
-.todoWapper {
+    h1 {
+      margin: 2rem auto;
+      font-size: 24px;
+      font-weight: bold;
+      color: $base-color;
+    }
+  }
+  .todoWapper {
     width: 80%;
     max-width: 25rem;
     margin: 0 auto;
+  }
 }

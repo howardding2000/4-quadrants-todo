@@ -1,3 +1,10 @@
 $base-color: lightsalmon;
 $primary-color: salmon;
-$weak-color: gray;
+$drakColor: gray;
+$primayBtn: #bfa;
+
+@mixin flexAlignCenter($justifyContent) {
+    display: flex;
+    justify-content: $justifyContent;
+    align-items: center;
+}
