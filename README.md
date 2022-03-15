@@ -11,4 +11,5 @@ These are the four quadrants of the Time Management Matrix:
 
 ![4 quadrant management method](https://github.com/howardding2000/4-quadrants-todo/blob/master/matrix-time-management.png)
 
+## How to use 4Q-todo
 
