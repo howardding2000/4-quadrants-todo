@@ -9,4 +9,6 @@ These are the four quadrants of the Time Management Matrix:
 - Q3: Urgent but not important.
 - Q4: Not urgent and not important.
 
+![4 quadrant management method](https://github.com/howardding2000/4-quadrants-todo/blob/master/matrix-time-management.png)
+
 
