@@ -5,7 +5,7 @@ import { TodosContext } from '../store/todos-context';
 import Button from '../UI/Button';
 import TodoItem from './TodoItem';
 
-import classes from './Todos.module.css';
+import classes from './Todos.module.scss';
 
 const Todo: React.FC = () => {
   const {todoItems,updateTodo,removeTodo,dragTodo,dropTodo,cleanTodos} = useContext(TodosContext);

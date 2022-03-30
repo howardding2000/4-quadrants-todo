@@ -1,8 +1,9 @@
 import React from "react";
+import { MdDoneOutline, MdDeleteOutline } from "react-icons/md";
 import Todo from "../models/todo";
 // import Card from '../UI/Card';
 import DndList from "../UI/DndList";
-import classes from "./TodoItem.module.css";
+import classes from "./TodoItem.module.scss";
 
 const TodoItem: React.FC<{
   item: Todo;
@@ -11,7 +12,6 @@ const TodoItem: React.FC<{
   onDragTodo: (dragId: string) => void;
   onDropTodo: (tragetId: string) => void;
 }> = (props) => {
-
   // task handlers
   const completeTodoHandler = (event: React.MouseEvent) => {
     props.onUpdateTodo({ ...props.item, isCompleted: !props.item.isCompleted });
@@ -32,36 +32,43 @@ const TodoItem: React.FC<{
       onDrapItem={props.onDragTodo}
       onDropTodo={props.onDropTodo}
     >
-      <div  className={`${classes.item} ${
+      <div
+        className={`${classes.item} ${
           props.item.isCompleted
             ? classes["is-completed"]
             : classes[`is-not-completed`]
-        }`}>
-      <div className={classes.text} onClick={completeTodoHandler}>
-        {props.item.text}
-      </div>
-      <section>
-        <div className={classes.status}>
-          {props.item.isCompleted ? (
-            <div>DONE</div>
-          ) : (
-            <>
-              <div className={classes["status-h"]} onClick={changeHighHandler}>
-                {props.item.isHigh ? "H" : "NH"}
-              </div>
-              <div
-                className={classes["status-u"]}
-                onClick={changeUrgentHandler}
-              >
-                {props.item.isUrgent ? "U" : "NU"}
-              </div>
-            </>
-          )}
+        }`}
+      >
+        <div className={classes.text} onClick={completeTodoHandler}>
+          {props.item.text}
         </div>
-        <div className={classes.remove} onClick={removeTodo}>
-          Remove
-        </div>
-      </section>
+        <section>
+          <div className={classes.status}>
+            {props.item.isCompleted ? (
+              <MdDoneOutline />
+            ) : (
+              <>
+                <div
+                  className={classes["status-h"]}
+                  onClick={changeHighHandler}
+                >
+                  {props.item.isHigh ? "H" : "NH"}
+                </div>
+                <div
+                  className={classes["status-u"]}
+                  onClick={changeUrgentHandler}
+                >
+                  {props.item.isUrgent ? "U" : "NU"}
+                </div>
+              </>
+            )}
+          </div>
+          <div className={classes.remove} onClick={removeTodo}>
+            <div>
+              <MdDeleteOutline />
+            </div>
+          </div>
+        </section>
       </div>
     </DndList>
   );

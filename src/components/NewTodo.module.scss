@@ -7,10 +7,10 @@
   width: 100%;
   margin: 1rem 0;;
   border-radius: 1rem;
-  border: 2px solid salmon;
+  border: 2px solid var(--primary-color-light);
 
   ::placeholder{
-    color: gray;
+    color: var(--bg-colo);
   }
   
   >input {
@@ -20,7 +20,7 @@
     font-size: 1rem;
     outline: none;
     border: none;
-    border-bottom: 2px solid salmon;
+    border-bottom: 2px solid var(--primary-color);
     color: gray;
     
   }
@@ -42,10 +42,10 @@
 
     label {
         margin-right: 1rem;
-        color: lightgray;
+        color: var(--bg-color);
     }
     input:checked + label {
-      color: salmon;
+      color: var(--primary-color);
     }
   }
 }

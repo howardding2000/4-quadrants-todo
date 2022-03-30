@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import { ItemTypes } from "../dnd/ItemTypes";
-import classes from "./DndList.module.css";
+import classes from "./DndList.module.scss";
 
 const DndList: React.FC<{
   id: string;
@@ -41,7 +41,11 @@ const DndList: React.FC<{
         // display: isDragging? 'none': 'block',
       }}
     >
-      <div ref={drop} style={isOver ? { outline: "3px solid lightgray" } : {}}>
+      <div
+      className={classes.dnd_item}
+        ref={drop}
+        style={isOver ? { outline: "3px solid lightgray" } : {}}
+      >
         {props.children}
       </div>
     </li>
