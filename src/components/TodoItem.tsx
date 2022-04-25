@@ -78,7 +78,7 @@ const TodoItem: React.FC<{
           </div>
           <div className={classes.remove} onClick={removeTodo}>
             <div>
-              <MdDeleteOutline />
+              <MdDeleteOutline className={classes["remove-icon"]} />
             </div>
           </div>
         </section>
