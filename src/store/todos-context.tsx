@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useLayoutEffect,useRef } from "react";
+import React, { useState, useCallback, useLayoutEffect, useRef } from "react";
 import Todo from "../models/todo";
 
 type TodosContextObj = {
@@ -21,13 +21,56 @@ export const TodosContext = React.createContext<TodosContextObj>({
   cleanTodos: () => {},
 });
 
+const initTodos: Todo[] = [
+  {
+    id: "-1",
+    text: "Q1 is high and urgent.",
+    isHigh: true,
+    isUrgent: true,
+    isCompleted: false,
+  },
+  {
+    id: "-2",
+    text: "Q2 is high but not urgent.",
+    isHigh: true,
+    isUrgent: false,
+    isCompleted: false,
+  },
+  {
+    id: "-3",
+    text: "Q3 is not high but urgent.",
+    isHigh: false,
+    isUrgent: true,
+    isCompleted: false,
+  },
+  {
+    id: "-4",
+    text: "Q4 is not high and not urgent.",
+    isHigh: false,
+    isUrgent: false,
+    isCompleted: false,
+  },
+  {
+    id: "-5",
+    text: "Q5 is a completed task.",
+    isHigh: true,
+    isUrgent: true,
+    isCompleted: true,
+  },
+];
+
 const TodosContextProvider: React.FC<{}> = (props) => {
   const [todos, setTodos] = useState<Todo[]>([]);
-  const drapIdRef = useRef('');
+  const drapIdRef = useRef("");
 
   useLayoutEffect(() => {
     //get todolist from local storage
     const reference = localStorage.getItem("todos");
+
+    if (!reference) {
+      localStorage.setItem("todos", JSON.stringify(initTodos));
+      setTodos(initTodos);
+    }
 
     if (reference) {
       const LocalTodos: Todo[] = JSON.parse(reference);
@@ -64,7 +107,6 @@ const TodosContextProvider: React.FC<{}> = (props) => {
   }, []);
 
   const dragTodoHandler = (id: string) => {
-  
     if (drapIdRef.current === id) {
       return;
     }
@@ -73,44 +115,42 @@ const TodosContextProvider: React.FC<{}> = (props) => {
   };
 
   const dropTodoHandler = useCallback((tragetId: string) => {
-      const drapId = drapIdRef.current;
-      if (drapId === tragetId) {
-        return;
+    const drapId = drapIdRef.current;
+    if (drapId === tragetId) {
+      return;
+    }
+
+    setTodos((prevTodos) => {
+      // rearrange the order of todolist
+      const drapIndex = prevTodos.findIndex((item) => item.id === drapId);
+
+      // get dragTodo by id
+      const dragTodo = prevTodos[drapIndex];
+
+      // remove dragTodo from todolist
+      const updatedTodos = [...prevTodos.filter((item) => item.id !== drapId)];
+      const tragetIndex = updatedTodos.findIndex(
+        (item) => item.id === tragetId
+      );
+
+      // replace dragTodo into todolist
+      // If drap from the topside of the traget
+      if (drapIndex > tragetIndex) {
+        updatedTodos.splice(tragetIndex, 0, dragTodo);
+        updatedTodos[tragetIndex].isCompleted =
+          updatedTodos[tragetIndex + 1].isCompleted;
       }
-      
-      setTodos((prevTodos) => {
-        // rearrange the order of todolist
-        const drapIndex = prevTodos.findIndex((item) => item.id === drapId);
 
-        // get dragTodo by id
-        const dragTodo = prevTodos[drapIndex];
-
-        // remove dragTodo from todolist
-        const updatedTodos = [
-          ...prevTodos.filter((item) => item.id !== drapId),
-        ];
-        const tragetIndex = updatedTodos.findIndex(
-          (item) => item.id === tragetId
-        );
-
-        // replace dragTodo into todolist
-        // If drap from the topside of the traget
-        if (drapIndex > tragetIndex) {
-          updatedTodos.splice(tragetIndex, 0, dragTodo);
-          updatedTodos[tragetIndex].isCompleted =
-            updatedTodos[tragetIndex + 1].isCompleted;
-        }
-
-        // If drap from the downside of the traget
-        if (drapIndex <= tragetIndex) {
-          updatedTodos.splice(tragetIndex + 1, 0, dragTodo);
-          updatedTodos[tragetIndex + 1].isCompleted =
-            updatedTodos[tragetIndex].isCompleted;
-        }
-        localStorage.setItem("todos", JSON.stringify(updatedTodos));
-        return updatedTodos;
-      });
-    },[])
+      // If drap from the downside of the traget
+      if (drapIndex <= tragetIndex) {
+        updatedTodos.splice(tragetIndex + 1, 0, dragTodo);
+        updatedTodos[tragetIndex + 1].isCompleted =
+          updatedTodos[tragetIndex].isCompleted;
+      }
+      localStorage.setItem("todos", JSON.stringify(updatedTodos));
+      return updatedTodos;
+    });
+  }, []);
 
   const cleanTodosHandler = () => {
     setTodos([]);
