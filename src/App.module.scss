@@ -1,0 +1,19 @@
+.App {
+  width: 100vw;
+  min-width: 360px;
+  header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    h1 {
+      margin: 0.5rem;
+      padding: 0;
+      color: var(--primary-color);
+    }
+  }
+  .todoWapper {
+    width: 80%;
+    max-width: 25rem;
+    margin: 0 auto;
+  }
+}

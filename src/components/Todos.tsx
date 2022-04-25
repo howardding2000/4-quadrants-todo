@@ -1,23 +1,29 @@
-import React, { useContext } from 'react';
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
-import { TodosContext } from '../store/todos-context';
-import Button from '../UI/Button';
-import TodoItem from './TodoItem';
+import React, { useContext } from "react";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+import { TodosContext } from "../store/todos-context";
+import Button from "../UI/Button";
+import TodoItem from "./TodoItem";
+import Todo from "../models/todo";
 
-import classes from './Todos.module.scss';
+import classes from "./Todos.module.scss";
 
-const Todo: React.FC = () => {
-  const {todoItems,updateTodo,removeTodo,dragTodo,dropTodo,cleanTodos} = useContext(TodosContext);
-  // const updateTodo = todosCxt.updateTodo;
-  // const removeTodo = todosCxt.removeTodo;
-  // const dragTodo = todosCxt.dragTodo;
-  // const dropTodo = todosCxt.dropTodo;
-  // const cleanTodos = todosCxt.cleanTodos;
-  const activeTodoList = todoItems.filter((item) => !item.isCompleted);
-  const completedTodoList = todoItems.filter(
-    (item) => item.isCompleted
-  );
+const Todos: React.FC = () => {
+  const { todoItems, updateTodo, removeTodo, dragTodo, dropTodo, cleanTodos } =
+    useContext(TodosContext);
+
+  const sortTodos = (a: Todo, b: Todo): number => {
+    const getStateWeight = (todo: Todo): number => {
+      if (todo.isHigh && todo.isUrgent) return 4;
+      if (todo.isHigh && !todo.isUrgent) return 3;
+      if (!todo.isHigh && todo.isUrgent) return 2;
+      return 1;
+    };
+    return getStateWeight(b) - getStateWeight(a);
+  };
+
+  const activeTodoList = todoItems.filter((item) => !item.isCompleted).sort(sortTodos);
+  const completedTodoList = todoItems.filter((item) => item.isCompleted);
 
   return (
     <DndProvider backend={HTML5Backend}>
@@ -30,7 +36,6 @@ const Todo: React.FC = () => {
             onRemoveTodo={removeTodo}
             onDragTodo={dragTodo}
             onDropTodo={dropTodo}
-
           />
         ))}
 
@@ -50,4 +55,4 @@ const Todo: React.FC = () => {
   );
 };
 
-export default Todo;
+export default Todos;
