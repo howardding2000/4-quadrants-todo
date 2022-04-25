@@ -1,27 +1,23 @@
 :root {
-  --primary-color: #4299E1;
-  --primary-color-light:#90CDF4;
-  --bg-color:#A0AEC0;
-  --bg-color-light:#EDF2F7;
-  --border-color:#CBD5E0;
+  --primary-color: #4299e1;
+  --primary-color-light: #90cdf4;
+  --bg-color: #a0aec0;
+  --bg-color-light: #edf2f7;
+  --border-color: #cbd5e0;
   --white: #ffffff;
+  --danger: #fc8181;
 }
-
-
-
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
-
