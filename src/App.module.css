@@ -12,7 +12,7 @@
     margin: 0.5rem;
     padding: 0;
 
-    color:salmon;
+    color:var(--primary-color);
 }
 .todoWapper {
     width: 80%;
