@@ -13,3 +13,5 @@ These are the four quadrants of the Time Management Matrix:
 
 ## How to use 4Q-todo
 
+Please try the [demo](https://4q-todo.vercel.app/).
+
