@@ -1,7 +1,7 @@
 import Todos from './components/Todos';
 import TodosContextProvider from './store/todos-context';
 
-import classes from './App.module.css';
+import classes from './App.module.scss';
 import NewTodo from './components/NewTodo';
 
 function App() {
