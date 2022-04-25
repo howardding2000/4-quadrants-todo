@@ -40,7 +40,6 @@ const TodoItem: React.FC<{
       return `${classes["is-nh-nu"]}`;
     }
     return "";
-    
   })();
 
   return (
@@ -61,24 +60,21 @@ const TodoItem: React.FC<{
         </div>
         <section>
           <div className={classes.status}>
-            {props.item.isCompleted ? (
+            {/* {props.item.isCompleted ? (
               <MdDoneOutline />
-            ) : (
-              <>
-                <div
-                  className={classes["status-h"]}
-                  onClick={changeHighHandler}
-                >
-                  {props.item.isHigh ? "H" : "NH"}
-                </div>
-                <div
-                  className={classes["status-u"]}
-                  onClick={changeUrgentHandler}
-                >
-                  {props.item.isUrgent ? "U" : "NU"}
-                </div>
-              </>
-            )}
+            ) : ( */}
+            <>
+              <div className={classes["status-h"]} onClick={changeHighHandler}>
+                {props.item.isHigh ? "H" : "NH"}
+              </div>
+              <div
+                className={classes["status-u"]}
+                onClick={changeUrgentHandler}
+              >
+                {props.item.isUrgent ? "U" : "NU"}
+              </div>
+            </>
+            {/* )} */}
           </div>
           <div className={classes.remove} onClick={removeTodo}>
             <div>
