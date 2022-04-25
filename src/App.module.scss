@@ -8,7 +8,19 @@
     h1 {
       margin: 0.5rem;
       padding: 0;
-      color: var(--primary-color);
+      // color: var(--primary-color);
+      background: linear-gradient(
+        45deg,
+        #fc8181 25%,
+        #f6ad55 25%,
+        #f6ad55 50%,
+        #63b3ed 50%,
+        #63b3ed 75%,
+        #68d391 75%,
+        #68d391 100%
+      );
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
   }
   .todoWapper {
