@@ -12,6 +12,8 @@ These are the four quadrants of the Time Management Matrix:
 ![4 quadrant management method](https://github.com/howardding2000/4-quadrants-todo/blob/master/assets/matrix-time-management.png)
 
 ## How to use 4Q-todo
-
+### User Interface
+![User Interface](https://github.com/howardding2000/4-quadrants-todo/blob/master/assets/4q-todo-view.png)
+### Demo
 Please try the [demo](https://4q-todo.vercel.app/).
 
