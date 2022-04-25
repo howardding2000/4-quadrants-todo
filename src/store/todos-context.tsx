@@ -24,28 +24,28 @@ export const TodosContext = React.createContext<TodosContextObj>({
 const initTodos: Todo[] = [
   {
     id: "-1",
-    text: "Q1 is high and urgent.",
+    text: "Q1 is high and urgent task.",
     isHigh: true,
     isUrgent: true,
     isCompleted: false,
   },
   {
     id: "-2",
-    text: "Q2 is high but not urgent.",
+    text: "Q2 is high but not urgent task.",
     isHigh: true,
     isUrgent: false,
     isCompleted: false,
   },
   {
     id: "-3",
-    text: "Q3 is not high but urgent.",
+    text: "Q3 is not high but urgent task.",
     isHigh: false,
     isUrgent: true,
     isCompleted: false,
   },
   {
     id: "-4",
-    text: "Q4 is not high and not urgent.",
+    text: "Q4 is not high and not urgent task.",
     isHigh: false,
     isUrgent: false,
     isCompleted: false,
