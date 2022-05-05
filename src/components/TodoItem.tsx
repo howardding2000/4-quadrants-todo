@@ -26,7 +26,7 @@ const TodoItem: React.FC<{
     props.onRemoveTodo(props.item.id);
   };
 
-  const alertColor: string = (() => {
+  const badgeColor: string = (() => {
     if (props.item.isHigh && props.item.isUrgent) {
       return `${classes["is-h-u"]}`;
     }
@@ -53,8 +53,9 @@ const TodoItem: React.FC<{
           props.item.isCompleted
             ? classes["is-completed"]
             : classes[`is-not-completed`]
-        } ${alertColor}`}
+        }`}
       >
+        <div className={`${classes.badge} ${badgeColor}`}></div>
         <div className={classes.text} onClick={completeTodoHandler}>
           {props.item.text}
         </div>

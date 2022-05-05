@@ -6,13 +6,20 @@
   overflow: hidden;
   border-radius: 5px;
   box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.2);
-  // box-sizing: border-box;
+  box-sizing: border-box;
   font-weight: 500;
   transition: margin 0.5s ease;
 
   &:hover {
     margin-left: -10px;
     margin-right: 10px;
+  }
+
+  .badge{
+    align-self: start;
+    height:1.2rem;
+    width: .8rem;
+    border-radius: 0 0 5px 0;
   }
 
   .text {
@@ -86,8 +93,7 @@
 }
 
 .is-not-completed {
-  // background-color: var(--primary-color);
-  color: var(--white);
+  color: var(--primary-color);
   section {
     color: var(--primary-color);
     background-color: var(--bg-color-light);
